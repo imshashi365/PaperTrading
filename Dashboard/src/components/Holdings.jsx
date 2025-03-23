@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { holdings } from '../data/data'
+import { holdings } from '../data/data.jsx'
 import SignalCellularAltIcon from '@mui/icons-material/SignalCellularAlt';
 import { Dialog, DialogContent, DialogTitle, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import { VerticalGraph } from './VerticalGraph';
+import { VerticalGraph } from './VerticalGraph.jsx';
 
 const Holdings = () => {
     const [allHodings, setAllHodings] = useState([]);
