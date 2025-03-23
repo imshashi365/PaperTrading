@@ -1,34 +1,33 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { holdings } from '../data/data.jsx'
 import SignalCellularAltIcon from '@mui/icons-material/SignalCellularAlt';
 import { Dialog, DialogContent, DialogTitle, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { VerticalGraph } from './VerticalGraph.jsx';
 
 const Holdings = () => {
-    const [allHodings, setAllHodings] = useState([]);
+    const [allHoldings, setAllHoldings] = useState([]);
     const [showChart, setShowChart] = useState(false);
 
     useEffect(() => {
         axios.get("http://localhost:3002/allHoldings").then((res) => {
             console.log(res.data)
-            setAllHodings(res.data)
+            setAllHoldings(res.data)
         });
     }, [])
 
-    const labels = allHodings.map((stock) => stock.name);
+    const labels = allHoldings.map((stock) => stock.name);
     const chartData = {
         labels,
         datasets: [
             {
                 label: 'Current Value',
-                data: allHodings.map((stock) => stock.price * stock.qty),
+                data: allHoldings.map((stock) => stock.price * stock.qty),
                 backgroundColor: 'rgba(75, 192, 192, 0.5)',
             },
             {
                 label: 'Investment Value',
-                data: allHodings.map((stock) => stock.avg * stock.qty),
+                data: allHoldings.map((stock) => stock.avg * stock.qty),
                 backgroundColor: 'rgba(53, 162, 235, 0.5)',
             }
         ]
@@ -40,7 +39,7 @@ const Holdings = () => {
     return (
         <div className='text-white p-5'>
             <div className='flex justify-between items-center'>
-                <h1 className='text-2xl font-semibold'>Holdings ({allHodings.length}) </h1>
+                <h1 className='text-2xl font-semibold'>Holdings ({allHoldings.length}) </h1>
                 <button
                     onClick={handleChartOpen}
                     className='bg-zinc-700 text-zinc-100 px-4 py-1 rounded-md flex items-center gap-2 hover:bg-zinc-600'
@@ -61,7 +60,7 @@ const Holdings = () => {
                             <th className='text-left  w-48'>Net Chg.</th>
                             <th className='text-left w-48'>Day Chg.</th>
                         </tr>
-                        {allHodings.map((stock, index) => {
+                        {allHoldings.map((stock, index) => {
                             const curValue = stock.price * stock.qty;
                             const isProfit = curValue - stock.avg * stock.qty >= 0.0;
                             const profClass = isProfit ? 'text-green-500' : 'text-red-500';
