@@ -3,7 +3,7 @@ import Hyperspeed from '@/components/ui/Hyperspeed';
 import GradientText from '@/components/ui/GradientText'
 import TrueFocus from '@/components/ui/TrueFocus';
 import { Button } from "@/components/ui/button"
-import '/src/app.css'
+import '../../App.css'
 import Threads from '@/components/ui/Threads';
 import SpotlightCard from '@/components/ui/SpotlightCard';
 import ScrollVelocity from '@/components/ui/ScrollVelocity';
