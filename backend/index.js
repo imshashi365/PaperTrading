@@ -76,6 +76,7 @@ app.use(express.json());
 //     res.send("Done Data Inserted!")
 // })
 
+app.use(cors());
 app.get("/allHoldings",async(req,res)=>{
     try {
         let allHoldings=await HoldingModel.find({});
