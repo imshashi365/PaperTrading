@@ -8,7 +8,8 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
-    "build": "npm install"
+    "build": "mkdir -p dist && cp -r index.js package.json package-lock.json .env dist/",
+    "dev": "nodemon index.js"
   },
   "devDependencies": {
     "install": "^0.13.0",
