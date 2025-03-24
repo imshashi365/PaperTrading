@@ -13,18 +13,4 @@ export default defineConfig({
       "react-router-dom": path.resolve(__dirname, "./node_modules/react-router-dom")
     },
   },
-  build: {
-    outDir: 'dist',
-    assetsDir: 'assets',
-    rollupOptions: {
-      external: [],
-      output: {
-        globals: {
-          react: 'React',
-          'react-dom': 'ReactDOM',
-          'react-router-dom': 'ReactRouterDOM'
-        }
-      }
-    }
-  }
 })
