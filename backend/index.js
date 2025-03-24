@@ -82,6 +82,7 @@ app.use(express.json());
 
 
 
+app.use(cors());
 app.get("/allHoldings",async(req,res)=>{
     try {
         let allHoldings=await HoldingModel.find({});
