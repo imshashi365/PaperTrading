@@ -28,7 +28,8 @@ const Hero = () => {
                 </GradientText>
 
                 <h3 className='text-white text-2xl mt-5'>Experience the Thrill of Live Trading with Zero Risk!</h3>
-                <Button variant="outline" className='mt-5 h-10 w-60 p-5'>Start Paper Trade</Button>
+                <a href="https://dashboard-eta-lake.vercel.app/"> <Button variant="outline" className='mt-5 h-10 w-60 p-5'>Start Paper Trade</Button></a>
+
                 <div className='flex w-full justify-center mt-20'>
                     <div className='w-1/2 flex justify-center'>
                         <img src="/images/phone.png" className='w-2xl phonetrade' alt="" srcset="" />
