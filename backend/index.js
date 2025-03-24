@@ -11,13 +11,30 @@ const { OrderModel } = require("./models/OrderModel") // Corrected folder name
 const PORT = process.env.PORT || 3002;
 const uri = process.env.MONGO_URL;
 
+// MongoDB connection
+mongoose.connect(uri, { 
+  useNewUrlParser: true, 
+  useUnifiedTopology: true 
+})
+.then(() => console.log('Connected to MongoDB'))
+.catch(err => console.error('MongoDB connection error:', err));
+
 const app = express();
 
-app.use(cors({
-  origin: 'https://dashboard-eta-lake.vercel.app',
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  credentials: true
-}));
+// CORS configuration
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'https://dashboard-eta-lake.vercel.app');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  res.header('Access-Control-Allow-Credentials', 'true');
+  
+  // Handle preflight requests
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(200);
+  }
+  next();
+});
+
 app.use(express.json());
 
 // app.get('/addPositions', async (req, res) => {
@@ -60,41 +77,51 @@ app.use(express.json());
 // })
 
 app.get("/allHoldings",async(req,res)=>{
-    let allHoldings=await HoldingModel.find({});
-    res.json(allHoldings);
-
+    try {
+        let allHoldings=await HoldingModel.find({});
+        res.json(allHoldings);
+    } catch (error) {
+        console.error('Error fetching holdings:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
 });
 
 app.get("/allPositions",async(req,res)=>{
-    let allPositions=await positionsModel.find({});
-    res.json(allPositions);
-
+    try {
+        let allPositions=await positionsModel.find({});
+        res.json(allPositions);
+    } catch (error) {
+        console.error('Error fetching positions:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
 })
 
 app.post("/newOrder",async(req,res)=>{
-    let {name,qty,price,mode}=req.body;
-    let newOrder=new OrderModel({
-        name,
-        qty,
-        price,
-        mode
-    })
-    await newOrder.save();
-    res.send("Order Placed Successfully");
+    try {
+        let {name,qty,price,mode}=req.body;
+        let newOrder=new OrderModel({
+            name,
+            qty,
+            price,
+            mode
+        })
+        await newOrder.save();
+        res.send("Order Placed Successfully");
+    } catch (error) {
+        console.error('Error placing order:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
 })
 
 app.get("/allOrders",async(req,res)=>{
-    let allOrders=await OrderModel.find({});
-    res.json(allOrders);
+    try {
+        let allOrders=await OrderModel.find({});
+        res.json(allOrders);
+    } catch (error) {
+        console.error('Error fetching orders:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
 });
-
-mongoose.connect(uri)
-    .then(() => {
-        console.log("DB Connected Successfully");
-    })
-    .catch((err) => {
-        console.error("DB Connection Error:", err);
-    });
 
 app.get("/", (req, res) => {
     res.send("Server is running!");
