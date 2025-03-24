@@ -4,6 +4,9 @@ const mongoose = require('mongoose');
 const bodyParser=require('body-parser')
 const cors=require('cors')
 
+
+
+
 const { positionsModel } = require("./models/positionsModel") // Corrected folder name
 const { HoldingModel } = require("./models/HoldingModel") // Corrected folder name
 const { OrderModel } = require("./models/OrderModel") // Corrected folder name
@@ -20,6 +23,7 @@ mongoose.connect(uri, {
 .catch(err => console.error('MongoDB connection error:', err));
 
 const app = express();
+app.use(cors())
 
 // CORS configuration
 app.use((req, res, next) => {
@@ -75,6 +79,8 @@ app.use(express.json());
 //     })
 //     res.send("Done Data Inserted!")
 // })
+
+
 
 app.get("/allHoldings",async(req,res)=>{
     try {
