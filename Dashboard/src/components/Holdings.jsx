@@ -4,14 +4,14 @@ import SignalCellularAltIcon from '@mui/icons-material/SignalCellularAlt';
 import { Dialog, DialogContent, DialogTitle, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { VerticalGraph } from './VerticalGraph.jsx';
+import { API_URL } from '../config';
 
 const Holdings = () => {
     const [allHoldings, setAllHoldings] = useState([]);
     const [showChart, setShowChart] = useState(false);
 
     useEffect(() => {
-        axios.get("http://localhost:3002/allHoldings").then((res) => {
-            console.log(res.data)
+        axios.get(`${API_URL}/allHoldings`).then((res) => {
             setAllHoldings(res.data)
         });
     }, [])

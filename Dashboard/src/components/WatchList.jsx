@@ -4,6 +4,7 @@ import { watchlist } from "../Data/data";
 import { ArrowDownIcon, ArrowUpIcon } from 'lucide-react';
 import { BarChartOutlined, MoreHoriz } from '@mui/icons-material';
 import axios from 'axios';
+import { API_URL } from '../config';
 
 const WatchList = () => {
   return (
@@ -64,7 +65,7 @@ const WatchlistAction = ({ uid }) => {
 
   const handleBuyClick = async () => {
     try {
-      await axios.post("http://localhost:3002/newOrder", {
+      await axios.post(`${API_URL}/newOrder`, {
         name: uid,
         qty: stockQuantity,
         price: stockPrice,

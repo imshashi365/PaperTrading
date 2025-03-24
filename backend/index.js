@@ -14,7 +14,7 @@ const uri = process.env.MONGO_URL;
 const app = express();
 
 app.use(cors());
-app.use(bodyParser.json());
+app.use(express.json());
 
 // app.get('/addPositions', async (req, res) => {
 //     let tempPositions = [
@@ -55,7 +55,6 @@ app.use(bodyParser.json());
 //     res.send("Done Data Inserted!")
 // })
 
-
 app.get("/allHoldings",async(req,res)=>{
     let allHoldings=await HoldingModel.find({});
     res.json(allHoldings);
@@ -84,8 +83,6 @@ app.get("/allOrders",async(req,res)=>{
     let allOrders=await OrderModel.find({});
     res.json(allOrders);
 });
-
-app.use(express.json());
 
 mongoose.connect(uri)
     .then(() => {
