@@ -4,7 +4,7 @@ import { IconButton } from '@mui/material';
 
 const Footer = () => {
   return (
-    <div className="blank bg-zinc-900 w-full">
+    <div className="blank bg-zinc-900 w-full p-32">
       <div className='bg-zinc-900 w-full flex justify-center h-100 flex-row p-30'>
         <div className="company w-1/4 mr-20">
           <img src="/images/MindTradeLogo.png" alt="logo" />
