@@ -10,7 +10,7 @@ import Positions from './Positions';
 
 const Dashboard = () => {
     return (
-        <div className='dashboard-container h-screen flex bg-zinc-950 text-zinc-500 w-full'> 
+        <div className='dashboard-container min-h-screen max-h-full flex bg-zinc-950 text-zinc-500 w-full'> 
             <WatchList />
             <div className="content w-2/3">
                 <Routes>
