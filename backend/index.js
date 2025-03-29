@@ -23,7 +23,11 @@ mongoose.connect(uri, {
 .catch(err => console.error('MongoDB connection error:', err));
 
 const app = express();
-app.use(cors())
+
+// Body parser middleware
+app.use(express.json());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // CORS configuration
 app.use((req, res, next) => {
@@ -42,8 +46,6 @@ app.use((req, res, next) => {
   }
   next();
 });
-
-app.use(express.json());
 
 // app.get('/addPositions', async (req, res) => {
 //     let tempPositions = [
@@ -86,7 +88,6 @@ app.use(express.json());
 
 
 
-app.use(cors());
 app.get("/allHoldings",async(req,res)=>{
     try {
         let allHoldings=await HoldingModel.find({});
