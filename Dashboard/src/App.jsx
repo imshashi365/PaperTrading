@@ -1,18 +1,44 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
-import { Button } from "@/components/ui/button"
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './components/Home'
+import Login from './pages/Login'
+import { ClerkProvider, SignedIn, SignedOut } from '@clerk/clerk-react';
+
+if (!import.meta.env.VITE_CLERK_PUBLISHABLE_KEY) {
+  throw new Error('Missing Publishable Key')
+}
+
+const clerkPubKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/*" element={<Home />} />
-      </Routes>
-    </Router>
+    <ClerkProvider publishableKey={clerkPubKey}>
+      <Router>
+        <Routes>
+          <Route
+            path="/sign-in"
+            element={
+              <SignedOut>
+                <Login />
+              </SignedOut>
+            }
+          />
+          <Route
+            path="/*"
+            element={
+              <>
+                <SignedIn>
+                  <Home />
+                </SignedIn>
+                <SignedOut>
+                  <Login />
+                </SignedOut>
+              </>
+            }
+          />
+        </Routes>
+      </Router>
+    </ClerkProvider>
   );
 }
 

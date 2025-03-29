@@ -1,21 +1,53 @@
-import React, {useState,useEffect} from 'react'
+import React, {useState, useEffect} from 'react'
 import axios from 'axios' 
 import { format } from 'date-fns';
+import { useUser } from '@clerk/clerk-react';
 import { API_URL } from '../config';
+import { eventBus, EVENTS } from '../utils/eventBus';
 
 const Orders = () => {  
-    const [allOrders,setAllOrders]=useState([]);
+    const { user } = useUser();
+    const [allOrders, setAllOrders] = useState([]);
+    const [loading, setLoading] = useState(false);
     
-    useEffect(()=>{
-        axios.get(`${API_URL}/allOrders`).then((res)=>{
-            setAllOrders(res.data)
-        });
-    },[]);
+    const fetchOrders = async () => {
+        if (!user) return;
+        
+        try {
+            setLoading(true);
+            const res = await axios.get(`${API_URL}/allOrders`);
+            // Filter orders for the current user
+            const userOrders = res.data.filter(order => order.userId === user.id);
+            setAllOrders(userOrders);
+        } catch (error) {
+            console.error('Error fetching orders:', error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        fetchOrders();
+
+        // Listen for new orders
+        const handleOrderPlaced = () => {
+            fetchOrders();
+        };
+        
+        eventBus.on(EVENTS.ORDER_PLACED, handleOrderPlaced);
+        
+        return () => {
+            eventBus.off(EVENTS.ORDER_PLACED, handleOrderPlaced);
+        };
+    }, [user]);
 
     return (
         <div className='text-white p-10'>
             <div className='flex justify-between items-center'>
-                <h1 className='text-2xl font-semibold'>Orders ({allOrders.length})</h1>
+                <div>
+                    <h1 className='text-2xl font-semibold'>My Orders ({allOrders.length})</h1>
+                    <p className='text-sm text-zinc-400 mt-1'>Showing orders for {user?.firstName || user?.username}</p>
+                </div>
             </div>
             <div className='mt-4'>
                 <table className='w-full bg-zinc-900 px-5'>

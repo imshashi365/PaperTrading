@@ -105,18 +105,29 @@ app.get("/allPositions",async(req,res)=>{
 
 app.post("/newOrder",async(req,res)=>{
     try {
-        let {name,qty,price,mode}=req.body;
-        let newOrder=new OrderModel({
+        const {name, qty, price, mode, userId, userEmail} = req.body;
+        
+        if (!userId || !userEmail) {
+            return res.status(400).json({ error: 'User information is required' });
+        }
+
+        const newOrder = new OrderModel({
             name,
             qty,
             price,
-            mode
-        })
+            mode,
+            userId,
+            userEmail
+        });
+
         await newOrder.save();
-        res.send("Order Placed Successfully");
+        res.json({ message: "Order Placed Successfully", order: newOrder });
     } catch (error) {
-        console.error('Error placing order:', error);
-        res.status(500).json({ error: 'Internal server error' });
+        console.warn('Error placing order:', error);
+        res.status(500).json({ 
+            error: 'Failed to place order',
+            details: error.message
+        });
     }
 })
 

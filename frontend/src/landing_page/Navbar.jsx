@@ -22,11 +22,12 @@ const Navbar = () => {
 
       {/* Middle Section: Links (Hidden on Small Screens) */ }
   <div className="hidden md:flex gap-6 text-white px-20 items-center">
-    <Link to="/signup" className="hover:text-black">Signup</Link>
     <Link to="/about" className="hover:text-black">About</Link>
     <Link to="/product" className="hover:text-black">Products</Link>
     <Link to="/pricing" className="hover:text-black">Pricing</Link>
     <Link to="/support" className="hover:text-black">Support</Link>
+    {/* <Link to="/signup" className="hover:text-black">Signup</Link> */}
+    {/* <Link to="/dashboard" className="hover:text-black">Dashboard</Link> */}
     <Link to="/login" className="hover:text-black"><Button variant="ghost" className=" bg-white rounded-md w-28 text-black">Login</Button></Link>
   </div>
 
@@ -39,7 +40,6 @@ const Navbar = () => {
     </SheetTrigger>
     <SheetContent side="right" className="w-1/2 bg-zinc-900 shadow-md text-zinc-400">
       <div className="flex flex-col gap-4 text-lg items-center  ">
-        <a href="#" onClick={() => setOpen(false)} className="hover:text-zinc-200">Signup</a>
         <a href="#" onClick={() => setOpen(false)} className="hover:text-zinc-200">About</a>
         <a href="#" onClick={() => setOpen(false)} className="hover:text-zinc-200">Products</a>
         <a href="#" onClick={() => setOpen(false)} className="hover:text-zinc-200">Pricing</a>

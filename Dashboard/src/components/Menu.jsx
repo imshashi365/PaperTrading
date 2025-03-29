@@ -1,17 +1,13 @@
-import React, { act, useState } from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { UserButton, useUser } from '@clerk/clerk-react'
 
 const Menu = () => {
-
+    const { user } = useUser();
     const [selectedMenu, setSelectedMenu] = useState('0');
-    const [isProfileDropDownOpen, setIsProfileDropDownOpen] = useState(false);
 
     const handleMenuClick = (index) => {
         setSelectedMenu(index);
-    }
-
-    const handleProfileClick = (index) => {
-        isProfileDropDownOpen(!isProfileDropDownOpen);
     }
 
     const menuClass = "menu";
@@ -21,7 +17,7 @@ const Menu = () => {
     return (
         <div className='menu-container flex justify-between w-2/3 items-center'>
             <img src="/imagess/MindTradeLogo.png" style={{ width: "200px", height: "40px" }} alt="logo" />
-            <div className="menuslist flex justify-between items-center w-3/4">
+            <div className="menuslist flex justify-between items-center w-3/4 p-3">
                 <ul className='flex text-white items-center justify-between w-2/3'>
                     <li>
                         <Link style={{ textDecoration: 'none' }} to="/" onClick={() => handleMenuClick(0)}>
@@ -61,12 +57,19 @@ const Menu = () => {
                 </ul>
                 <hr />
 
-                <div className="profile flex  text-white w-1/3 justify-center items-center" onClick={handleProfileClick}>
-                    <div className="avatar flex items-center justify-between">
-                        <img src="/imagess/profile.png" alt="" style={{ width: "45px", borderRadius: "50%",marginRight:"10px" }} />
-                        <p className='username'>USERID</p>
-                    </div>
-                    
+                <div className="profile flex text-white justify-center items-center bg-zinc-900 rounded-md p-1">
+                    <UserButton
+                        appearance={{
+                            elements: {
+                                userButtonAvatarBox: "w-11 h-11",
+                                userButtonTrigger: "focus:shadow-none"
+                            }
+                        }}
+                    />
+                    {/* <div className="ml-3">
+                        <p className="username text-sm font-medium">{user?.firstName || user?.username}</p>
+                        <p className="text-xs text-gray-400">{user?.primaryEmailAddress?.emailAddress}</p>
+                    </div> */}
                 </div>
 
             </div>

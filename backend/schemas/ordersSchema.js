@@ -1,6 +1,15 @@
 const {Schema} = require("mongoose");
 
 const ordersSchema = new Schema({
+    userId: {
+        type: String,
+        required: true,
+        index: true
+    },
+    userEmail: {
+        type: String,
+        required: true
+    },
     name: {
         type: String,
         required: true
@@ -22,6 +31,11 @@ const ordersSchema = new Schema({
         type: Date,
         default: Date.now
     }
+}, {
+    timestamps: true
 });
+
+// Create compound index for efficient querying
+ordersSchema.index({ userId: 1, timestamp: -1 });
 
 module.exports = { ordersSchema };
