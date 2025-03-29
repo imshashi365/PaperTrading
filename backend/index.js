@@ -31,10 +31,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // CORS configuration
 app.use(cors({
-  origin: ['https://dashboard-eta-lake.vercel.app', 'http://localhost:5173'],
+  origin: ['https://dashboard-eta-lake.vercel.app', 'http://localhost:5173', 'https://paper-trading-dashboard.vercel.app'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization'],
-  credentials: true
+  credentials: true,
+  optionsSuccessStatus: 200
 }));
 
 // app.get('/addPositions', async (req, res) => {
@@ -100,9 +101,11 @@ app.get("/allPositions",async(req,res)=>{
 
 app.post("/newOrder",async(req,res)=>{
     try {
+        console.log('Received order request:', req.body);
         const {name, qty, price, mode, userId, userEmail} = req.body;
         
         if (!userId || !userEmail) {
+            console.log('Missing user information:', { userId, userEmail });
             return res.status(400).json({ error: 'User information is required' });
         }
 
@@ -115,13 +118,17 @@ app.post("/newOrder",async(req,res)=>{
             userEmail
         });
 
+        console.log('Attempting to save order:', newOrder);
         await newOrder.save();
+        console.log('Order saved successfully');
         res.json({ message: "Order Placed Successfully", order: newOrder });
     } catch (error) {
-        console.warn('Error placing order:', error);
+        console.error('Error placing order:', error);
+        console.error('Stack trace:', error.stack);
         res.status(500).json({ 
             error: 'Failed to place order',
-            details: error.message
+            details: error.message,
+            stack: error.stack
         });
     }
 })
