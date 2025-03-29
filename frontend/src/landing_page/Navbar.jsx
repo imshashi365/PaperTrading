@@ -28,7 +28,7 @@ const Navbar = () => {
     <Link to="/support" className="hover:text-black">Support</Link>
     {/* <Link to="/signup" className="hover:text-black">Signup</Link> */}
     {/* <Link to="/dashboard" className="hover:text-black">Dashboard</Link> */}
-    <Link to="/login" className="hover:text-black"><Button variant="ghost" className=" bg-white rounded-md w-28 text-black">Login</Button></Link>
+    <Link to="https://dashboard-eta-lake.vercel.app/" className="hover:text-black"><Button variant="ghost" className=" bg-white rounded-md w-28 text-black">Login</Button></Link>
   </div>
 
   {/* Right Section: Mobile Menu */ }
