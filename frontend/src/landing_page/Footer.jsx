@@ -8,7 +8,7 @@ const Footer = () => {
       <div className='bg-zinc-900 w-full flex justify-center h-100 flex-row p-30'>
         <div className="company w-1/4 mr-20">
           <img src="/images/MindTradeLogo.png" alt="logo" />
-          <p className='text-zinc-200'> © 2010 - 2025, Zerodha Broking Ltd. All rights reserved.</p>
+          <p className='text-zinc-200'> © 2010 - 2025, MindTrade Ltd. All rights reserved.</p>
             <div className="social flex w-1/6 justify-around">
               <IconButton
                 href="https://www.facebook.com"
@@ -87,8 +87,8 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="para px-30 text-zinc-600">
-        <p>Zerodha Broking Ltd.: Member of NSE, BSE​ &​ MCX – SEBI Registration no.: INZ000031633 CDSL/NSDL: Depository services through Zerodha Broking Ltd. – SEBI Registration no.: IN-DP-431-2019 Commodity Trading through Zerodha Commodities Pvt. Ltd. MCX: 46025; NSE-50001 – SEBI Registration no.: INZ000038238 Registered Address: Zerodha Broking Ltd., #153/154, 4th Cross, Dollars Colony, Opp. Clarence Public School, J.P Nagar 4th Phase, Bengaluru - 560078, Karnataka, India. For any complaints pertaining to securities broking please write to complaints@zerodha.com, for DP related to dp@zerodha.com. Please ensure you carefully read the Risk Disclosure Document as prescribed by SEBI | ICF
+      <div className="para px-30 text-zinc-600 mt-10">
+        <p>MindTrade Ltd.: Member of NSE, BSE​ &​ MCX – SEBI Registration no.: INZ000031633 CDSL/NSDL: Depository services through Zerodha Broking Ltd. – SEBI Registration no.: IN-DP-431-2019 Commodity Trading through Zerodha Commodities Pvt. Ltd. MCX: 46025; NSE-50001 – SEBI Registration no.: INZ000038238 Registered Address: Zerodha Broking Ltd., #153/154, 4th Cross, Dollars Colony, Opp. Clarence Public School, J.P Nagar 4th Phase, Bengaluru - 560078, Karnataka, India. For any complaints pertaining to securities broking please write to complaints@zerodha.com, for DP related to dp@zerodha.com. Please ensure you carefully read the Risk Disclosure Document as prescribed by SEBI | ICF
 
           Procedure to file a complaint on SEBI SCORES: Register on SCORES portal. Mandatory details for filing complaints on SCORES: Name, PAN, Address, Mobile Number, E-mail ID. Benefits: Effective Communication, Speedy redressal of the grievances
 
